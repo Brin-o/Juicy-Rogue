@@ -9,14 +9,18 @@ public class tweenListHolder : MonoBehaviour
     public enum  whatAmITweening
     {
         enemyBox,
-        enemyLaser
+        enemyLaser,
+        cursor
     };
 
+    //references
     SpriteMask myMask = default;
     SpriteRenderer myIndicator = default;
 
     public whatAmITweening tweenTarget;
     
+    public Transform pointer;
+    public Transform pointerEndPoint;
 
     SpriteRenderer spriteRenderer;
 
@@ -26,9 +30,6 @@ public class tweenListHolder : MonoBehaviour
     //Variables for idle rotation
     public bool rotated = false;
 
-    string invalidTweenTar = ("Invalid tween target, please check the dropdown on the object you are tweening.");
-
-
     private void Start() {
 
         switch (tweenTarget)
@@ -37,6 +38,13 @@ public class tweenListHolder : MonoBehaviour
                 var parent = transform.parent;
                 myMask = parent.GetChild(0).GetComponent<SpriteMask>();
                 myIndicator = parent.GetChild(1).GetComponent<SpriteRenderer>();   
+                myMask.transform.localScale = new Vector3 (1,3,1);
+
+                pointerEndPoint = transform.GetChild(0).GetComponent<Transform>();
+                pointer = transform.parent.GetChild(3);
+
+                spriteRenderer = GetComponent<SpriteRenderer>();
+                spriteRenderer.color = new Color (1f,1f,1f, 0f);
                 break;
 
             case whatAmITweening.enemyBox:
@@ -60,14 +68,23 @@ public class tweenListHolder : MonoBehaviour
                 spriteRenderer.DOKill();
                 //Preveri če je laser aktiviran (1 = aktiviran)
                 if (spriteRenderer.color.a < 1)  //fada in laser ter naredi punch animacijo
-
                 {    
                     laserOn = true;
-                    myIndicator.transform.DOScale(Vector3.one, 0.25f); //nnaredi indikator
-                    myMask.transform.DOScaleX(transform.localScale.x + 2, castTime); //maska inkator
+                    myIndicator.transform.DOScale(Vector3.one, castTime * 0.1f); //nnaredi indikator
                     DOTween.Sequence()
-                        .Append(spriteRenderer.DOFade (0.9f, (castTime * 0.9f) ) )
-                        .Append(transform.DOPunchScale ( new Vector3 ( transform.localScale.x, 0.8f,1 ) , 0.1f , 1,0) )
+                        .Append(myMask.transform.DOScaleX(transform.localScale.x, castTime))
+                        .Append(myMask.transform.DOScaleX(transform.localScale.x + 2, 0.01f))
+                        ;
+
+                    Vector3 pointerOrigin = pointer.position;
+                    DOTween.Sequence()
+                        .Append(spriteRenderer.DOFade (0.9f, (castTime) ) )
+                        .Append(pointer.DOMove(pointerEndPoint.position, 0.5f))
+                        //Na end točki sem z pointerjem tako, da ga zarotiram naokoli.
+                        .Append(pointer.DORotate(new Vector3(0,0, 180f), 0.2f, RotateMode.LocalAxisAdd))
+                        .Append(pointer.DOMove(pointerOrigin, 0.5f))
+                        .Append(pointer.DORotate(new Vector3(0,0, 180f), 0.2f, RotateMode.LocalAxisAdd))
+                        //.Append(transform.DOPunchScale ( new Vector3 ( transform.localScale.x, 0.8f,1 ) , 0.1f , 1,0) )
                         .Insert(castTime*0.9f, spriteRenderer.DOFade(1,castTime * 0.1f))
                         ;
                 }
@@ -75,8 +92,7 @@ public class tweenListHolder : MonoBehaviour
                 {
                     laserOn = false;
                     DOTween.Sequence()
-                        .Append(transform.DOShakeScale(0.5f,1,1,1,true))
-                        .Insert(0f, myIndicator.transform.DOScale(Vector3.zero, 0.25f))
+                        .Insert(0.5f, myIndicator.transform.DOScale(Vector3.zero, 0.25f))
                         .Append(spriteRenderer.DOFade(0,0.5f))
                         .Append(myMask.transform.DOScaleX(1, 0.75f))
                         ;
@@ -84,8 +100,9 @@ public class tweenListHolder : MonoBehaviour
                 break;
 
             default:
-                Debug.Log(invalidTweenTar);
+                WrongTweenTarget();
                 return;
+
         }
 
     }
@@ -100,7 +117,7 @@ public class tweenListHolder : MonoBehaviour
                 break;
 
             default:
-                Debug.Log(invalidTweenTar);
+                WrongTweenTarget();
                 return;
         }
 
@@ -113,7 +130,8 @@ public class tweenListHolder : MonoBehaviour
         if (rotated)
             rotation = rotation * -1;
         DOTween.Sequence()
-            .Append(transform.DOLocalRotate(new Vector3(0,0, rotation), rotateTimer, RotateMode.FastBeyond360))
+            .Append(transform.DOLocalRotate(new Vector3(0,0, rotation), rotateTimer, RotateMode.LocalAxisAdd))
+
             ;
         if (rotated)
             rotated = false;
@@ -122,6 +140,56 @@ public class tweenListHolder : MonoBehaviour
         
 
     }
+    
+    
+    public void cursorPunch()
+    {
+        switch (tweenTarget)
+        {
+            case whatAmITweening.cursor:
+                if(transform.localScale.x == 1)
+                    transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 0.1f, 1, 0 );
+                else
+                    transform.DOScale(Vector3.one, 0.05f);
+                break;
+            default:
+                WrongTweenTarget();
+                return;
+        }
+    }
+    public void cursorUnFade()
+    {
+        switch (tweenTarget)
+        {
+            case whatAmITweening.cursor:
+                    spriteRenderer.DOKill();
+                    spriteRenderer.DOFade(1f, 0.1f);
+                
+                break;
+            default:
+                WrongTweenTarget();
+                return;
+        }
+    }
+    
+    public void cursorFade()
+    {
+        switch (tweenTarget)
+        {
+            case whatAmITweening.cursor:
+                    spriteRenderer.DOKill();
+                    spriteRenderer.DOFade(0.35f, 0.1f);
+                
+                break;
+            default:
+                WrongTweenTarget();
+                return;
+        }
+    }
+    
+    
+    
+    
     private void FixedUpdate() {
         switch (tweenTarget)
         {
@@ -141,16 +209,9 @@ public class tweenListHolder : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() {
-        switch (tweenTarget)
-        {
-            case whatAmITweening.enemyLaser:
-                Gizmos.color = new Color(1,0,0,0.8f);
-                Gizmos.DrawCube (new Vector3(transform.position.x + (transform.localScale.x * 0.5f), transform.position.y, 1f), transform.localScale);
-                break;
-            default:
-                break;
-        }
 
+    private void WrongTweenTarget(){
+        Debug.Log("Invalid tween target, please check the dropdown on the object you are tweening.");
+        return;
     }
 }
