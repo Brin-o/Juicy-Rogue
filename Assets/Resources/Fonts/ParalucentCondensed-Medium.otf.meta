@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b4066641f3d0bf843ad13be4c30fb346
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Paralucent Condensed
+  fontNames:
+  - Paralucent Condensed
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1500d1ced2dec724eb2ab12acb596617, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

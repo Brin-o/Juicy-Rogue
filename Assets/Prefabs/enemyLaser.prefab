@@ -99,10 +99,10 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.98823535, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0, g: 0.98823535, b: 1, a: 0.60784316}
+      key1: {r: 1, g: 1, b: 1, a: 0.60784316}
+      key2: {r: 0, g: 0, b: 0, a: 0.39215687}
+      key3: {r: 0, g: 0, b: 0, a: 0.35014006}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -116,16 +116,16 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 54934
-      atime2: 65535
-      atime3: 0
-      atime4: 0
+      atime1: 23516
+      atime2: 54741
+      atime3: 55898
+      atime4: 65535
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 5
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -285644927
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 88fe434770baa2043915a6cbcd59a7b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[{"name":"laserSystem","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"onOffTimer","value":{"$content":10.0,"$type":"System.Single"},"$version":"A"},{"name":"laserCastTime","value":{"$content":1.5,"$type":"System.Single"},"$version":"A"},{"name":"laserTick","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"},{"name":"rotationTimer","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"},{"name":"rotateToAngle","value":{"$content":45.0,"$type":"System.Single"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _json: '{"declarations":{"collection":{"$content":[{"name":"laserSystem","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"onOffTimer","value":{"$content":10.0,"$type":"System.Single"},"$version":"A"},{"name":"laserCastTime","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"},{"name":"laserTick","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"},{"name":"rotationTimer","value":{"$content":1.0,"$type":"System.Single"},"$version":"A"},{"name":"rotateToAngle","value":{"$content":45.0,"$type":"System.Single"},"$version":"A"},{"name":"delay","value":{"$content":0.0,"$type":"System.Single"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 2942177193975677717}
 --- !u!114 &2942177193681528792
@@ -270,6 +270,7 @@ MonoBehaviour:
   pointer: {fileID: 0}
   pointerEndPoint: {fileID: 0}
   laserOn: 0
+  pointerOrigin: {fileID: 700193396491792151}
   rotation: 0
   rotated: 0
 --- !u!1 &2942177193975677723
@@ -283,11 +284,10 @@ GameObject:
   - component: {fileID: 2942177193975677722}
   - component: {fileID: 2942177193975677716}
   - component: {fileID: 2942177193975677717}
-  - component: {fileID: 2942177193975677719}
   - component: {fileID: 2942177193975677718}
   m_Layer: 0
-  m_Name: laserSystem
-  m_TagString: Untagged
+  m_Name: laserSize(changeMe)
+  m_TagString: enemyPointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,6 +304,7 @@ Transform:
   m_LocalScale: {x: 5, y: 0.8, z: 1}
   m_Children:
   - {fileID: 7647855217064513931}
+  - {fileID: 700193396491792151}
   m_Father: {fileID: 2942177193681528793}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -342,10 +343,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -305055375
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 63ae4a6ea0ca10e4aa9258e2b3bf7721, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.18039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -371,34 +372,9 @@ MonoBehaviour:
   pointer: {fileID: 0}
   pointerEndPoint: {fileID: 0}
   laserOn: 0
+  pointerOrigin: {fileID: 700193396491792151}
   rotation: 0
   rotated: 0
---- !u!61 &2942177193975677719
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942177193975677723}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.14, y: 0.14, z: 0.14, w: 0.14}
-    pivot: {x: 0, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &2942177193975677718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2942177194102723831}
   - component: {fileID: 2942177194102723830}
+  - component: {fileID: 888231338848794180}
   m_Layer: 0
   m_Name: laserAura
   m_TagString: Untagged
@@ -491,6 +468,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &888231338848794180
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942177194102723828}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.104, y: 1.1}
+    newSize: {x: 1.104, y: 1.1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.45200002, y: -0.46600002}
+      - {x: 0.52400005, y: -0.374}
+      - {x: 0.55200005, y: -0.294}
+      - {x: 0.55200005, y: 0.30200002}
+      - {x: 0.512, y: 0.39400002}
+      - {x: 0.448, y: 0.462}
+      - {x: 0.40800002, y: 0.50200003}
+      - {x: 0.30400002, y: 0.55}
+      - {x: -0.296, y: 0.55}
+      - {x: -0.34, y: 0.53800005}
+      - {x: -0.40800002, y: 0.49800003}
+      - {x: -0.46800002, y: 0.45000002}
+      - {x: -0.52400005, y: 0.374}
+      - {x: -0.55200005, y: 0.29000002}
+      - {x: -0.55200005, y: -0.282}
+      - {x: -0.54800004, y: -0.298}
+      - {x: -0.536, y: -0.33400002}
+      - {x: -0.52000004, y: -0.37}
+      - {x: -0.492, y: -0.42200002}
+      - {x: -0.40800002, y: -0.50200003}
+      - {x: -0.30400002, y: -0.55}
+      - {x: 0.28800002, y: -0.55}
+      - {x: 0.33600003, y: -0.53400004}
+      - {x: 0.40800002, y: -0.49800003}
 --- !u!1 &2942177194274682200
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +544,7 @@ Transform:
   m_GameObject: {fileID: 2942177194274682200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 2942177193681528793}
   m_RootOrder: 1
@@ -558,7 +584,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -305055375
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f8d437ef41855b048af8eba024fda5a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -593,9 +619,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2942177194275920770}
   - component: {fileID: 2942177194275920797}
+  - component: {fileID: 6850923565952558365}
   m_Layer: 0
   m_Name: laserDirectionIndicator
-  m_TagString: Untagged
+  m_TagString: enemyPointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -608,8 +635,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2942177194275920771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.76, y: 0, z: 0}
-  m_LocalScale: {x: 435, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0.81, y: 0, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.75, z: 1}
   m_Children:
   - {fileID: 958083995287131316}
   m_Father: {fileID: 2942177193681528793}
@@ -653,7 +680,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b10133933fb7e7d40b37d0713d3ba457, type: 3}
-  m_Color: {r: 0, g: 0.990005, b: 1, a: 1}
+  m_Color: {r: 0.909804, g: 0.14901961, b: 0.3529412, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -663,6 +690,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!60 &6850923565952558365
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942177194275920771}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.728, y: 1}
+    newSize: {x: 1.08, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.128, y: 0.252}
+      - {x: -0.14, y: 0.24800001}
+      - {x: -0.14, y: -0.24800001}
+      - {x: -0.128, y: -0.252}
+      - {x: -0.09200001, y: -0.252}
+      - {x: 0.064, y: -0.136}
+      - {x: 0.064, y: 0.132}
+      - {x: -0.09200001, y: 0.252}
 --- !u!1 &2942177194512833190
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +749,7 @@ Transform:
   m_GameObject: {fileID: 2942177194512833190}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 14.246, y: 3, z: 1}
+  m_LocalScale: {x: 5.168, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 2942177193681528793}
   m_RootOrder: 0
@@ -735,7 +795,7 @@ SpriteMask:
   m_MaskAlphaCutoff: 0
   m_FrontSortingLayerID: -305055375
   m_BackSortingLayerID: 0
-  m_FrontSortingLayer: 2
+  m_FrontSortingLayer: 1
   m_BackSortingLayer: 0
   m_FrontSortingOrder: 0
   m_BackSortingOrder: 0
@@ -770,4 +830,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2942177193975677722}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4101019988735193033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 700193396491792151}
+  m_Layer: 0
+  m_Name: laserShootStartPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &700193396491792151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101019988735193033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.053, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2942177193975677722}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

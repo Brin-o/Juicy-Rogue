@@ -19,46 +19,77 @@ public class ScaleByVelocity : MonoBehaviour
 	private Vector3 targetTween;
 	private Vector3 originalScale;
 
+
+	public float scaleInverseAmount;
+	public float scaleAmount;
+
+	
+	//Camera tweening variables
+	Camera cam;
+	float orgCamSize;
+
+
+	private void Awake() {
+		Application.targetFrameRate = 70;
+	}
 	private void Start ()
 	{
 		startScale = transform.localScale;
 		originalScale = transform.localScale;
 		
+		cam = Camera.main;
+		orgCamSize = cam.orthographicSize;
+
+		
 	}
 
 	private void FixedUpdate ()
 	{
+		ScalePlayer();
+	}
+
+	private void ScalePlayer()
+	{
 		var velocity = rigidbody.velocity.magnitude;
 
 		//if (Mathf.Approximately (velocity, 0f))
-		if (velocity < velocityGate)
+		if (velocity < velocityGate && transform.localScale != Vector3.one)
 			transform.DOScale(originalScale, jumpToOriginalTimer);
 			//TODO: Ko se speeda up hočem animacijo potegnit iz 1,1 v karkoli bi moralo biti
 
-		var amount = velocity * strength + bias;
-		var inverseAmount = (1f / amount) * startScale.magnitude;
+		scaleAmount = velocity * strength + bias;
+		scaleInverseAmount = (1f / scaleAmount) * startScale.magnitude;
 
 
 		if (velocity > velocityGate)
 		{
 		
-			if (inverseAmount > yScaleLimit)
-				inverseAmount = yScaleLimit;
-			if (amount > 1.2f)
-				amount = 1.2f;
+			if (scaleInverseAmount > yScaleLimit)
+				scaleInverseAmount = yScaleLimit;
+			if (scaleAmount > 1.2f)
+				scaleAmount = 1.2f;
 			
+			Sequence tweenSequence = DOTween.Sequence();
+			
+			if(tweenSequence.IsActive() == false)
+				tweenSequence.Play();
+
 			switch (axis)
 			{
 				case Axis.X:
-					targetTween = new Vector3 (amount, inverseAmount, 1f);
-					transform.DOScale(targetTween,tweenTimer);
+					targetTween = new Vector3 (scaleAmount, scaleInverseAmount, 1f);
+					//transform.DOScale(targetTween,tweenTimer);
+					transform.localScale = targetTween;
 					return;
 				case Axis.Y:
-					targetTween = new Vector3 (inverseAmount, amount, 1f);
-					transform.DOScale(targetTween,tweenTimer);
+					targetTween = new Vector3 (scaleInverseAmount, scaleAmount, 1f);
+					//tweenSequence.Append(transform.DOScale(targetTween,tweenTimer));
+					
+					transform.localScale = targetTween;
 					return;
 			}
 		}
-		
+		else
+			return;
 	}
 }
