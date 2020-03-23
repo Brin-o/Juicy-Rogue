@@ -8,7 +8,7 @@ public class LookAlongVelocity : MonoBehaviour
 	public float minVelocity = 0.01f;
 	public new Rigidbody2D rigidbody;
 
-	private void Update ()
+	private void FixedUpdate ()
 	{
 		if (rigidbody == null)
 			return;

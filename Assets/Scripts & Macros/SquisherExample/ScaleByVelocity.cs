@@ -11,7 +11,6 @@ public class ScaleByVelocity : MonoBehaviour
 	public new Rigidbody2D rigidbody;
 	[Range(0, 1)]
 	public float velocityGate = 0.2f;
-	[SerializeField] float tweenTimer = 0.5f;
 	[SerializeField] float jumpToOriginalTimer = 0.1f;
 	[SerializeField] float yScaleLimit = 1.2f;
 
@@ -28,10 +27,6 @@ public class ScaleByVelocity : MonoBehaviour
 	Camera cam;
 	float orgCamSize;
 
-
-	private void Awake() {
-		Application.targetFrameRate = 70;
-	}
 	private void Start ()
 	{
 		startScale = transform.localScale;
@@ -39,7 +34,6 @@ public class ScaleByVelocity : MonoBehaviour
 		
 		cam = Camera.main;
 		orgCamSize = cam.orthographicSize;
-
 		
 	}
 

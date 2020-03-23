@@ -20,16 +20,4 @@ public class inheritLaserSize : MonoBehaviour
     
     }
 
-    
-    /*private void OnDrawGizmos() {
-        switch (tweenTarget)
-        {
-            case whatAmITweening.enemyLaser:
-                Gizmos.color = new Color(1,0,0,0.8f);
-                Gizmos.DrawCube (new Vector3(transform.position.x + (transform.localScale.x * 0.5f), transform.position.y, 1f), transform.localScale);
-                break;
-            default:
-                break;
-        }
-    }*/
 }

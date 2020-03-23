@@ -18,18 +18,9 @@ public class playerIndicatorRotation : MonoBehaviour
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-       mouseDirection = new Vector2(
+        mouseDirection = new Vector2(
             mousePosition.x - transform.position.x, 
             mousePosition.y - transform.position.y);
         transform.up = mouseDirection;
     }
-
-    /*void RotateBasedOnTarget()
-    {
-        Vector2 direction = new Vector2(
-            target.position.x - transform.position.x, 
-            target.position.y - transform.position.y);
-        transform.up = direction;
-    }*/
-
 }
