@@ -3,11 +3,9 @@ using DG.Tweening;
 public class ScaleByVelocity : MonoBehaviour
 {
 	public enum Axis { X, Y }
-
 	public float bias = 1f;
 	public float strength = 1f;
 	public Axis axis = Axis.Y;
-
 	public new Rigidbody2D rigidbody;
 	[Range(0, 1)]
 	public float velocityGate = 0.2f;
@@ -22,34 +20,24 @@ public class ScaleByVelocity : MonoBehaviour
 	public float scaleInverseAmount;
 	public float scaleAmount;
 
-	
-	//Camera tweening variables
-	Camera cam;
-	float orgCamSize;
 
 	private void Start ()
 	{
 		startScale = transform.localScale;
-		originalScale = transform.localScale;
-		
-		cam = Camera.main;
-		orgCamSize = cam.orthographicSize;
-		
+		originalScale = transform.localScale;	
 	}
 
-	private void FixedUpdate ()
+	private void Update ()
 	{
-		ScalePlayer();
+		ScaleObejct();
 	}
 
-	private void ScalePlayer()
+	private void ScaleObejct()
 	{
 		var velocity = rigidbody.velocity.magnitude;
 
-		//if (Mathf.Approximately (velocity, 0f))
 		if (velocity < velocityGate && transform.localScale != Vector3.one)
 			transform.DOScale(originalScale, jumpToOriginalTimer);
-			//TODO: Ko se speeda up hočem animacijo potegnit iz 1,1 v karkoli bi moralo biti
 
 		scaleAmount = velocity * strength + bias;
 		scaleInverseAmount = (1f / scaleAmount) * startScale.magnitude;
@@ -62,23 +50,16 @@ public class ScaleByVelocity : MonoBehaviour
 				scaleInverseAmount = yScaleLimit;
 			if (scaleAmount > 1.2f)
 				scaleAmount = 1.2f;
-			
-			Sequence tweenSequence = DOTween.Sequence();
-			
-			if(tweenSequence.IsActive() == false)
-				tweenSequence.Play();
 
 			switch (axis)
 			{
 				case Axis.X:
 					targetTween = new Vector3 (scaleAmount, scaleInverseAmount, 1f);
-					//transform.DOScale(targetTween,tweenTimer);
 					transform.localScale = targetTween;
 					return;
+				
 				case Axis.Y:
 					targetTween = new Vector3 (scaleInverseAmount, scaleAmount, 1f);
-					//tweenSequence.Append(transform.DOScale(targetTween,tweenTimer));
-					
 					transform.localScale = targetTween;
 					return;
 			}

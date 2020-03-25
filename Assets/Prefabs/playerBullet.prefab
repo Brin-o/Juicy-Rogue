@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6799415973705795380}
   - component: {fileID: 6799415973705795381}
   - component: {fileID: 6303418818339598099}
+  - component: {fileID: 418948045194350372}
+  - component: {fileID: 9083143066862702732}
+  - component: {fileID: 7277471573882462490}
   m_Layer: 0
   m_Name: playerBullet
   m_TagString: Untagged
@@ -45,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8501a9f3b1cfe44822c6b9b867d67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 6303418818339598099}
+  rigidbody2d: {fileID: 0}
 --- !u!212 &6799415973705795381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,3 +118,55 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &418948045194350372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799415973705795379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3284e79978172e84e9f9375e52afc4b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minVelocity: 0.01
+  rigidbody: {fileID: 6303418818339598099}
+--- !u!114 &9083143066862702732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799415973705795379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da850bbcd7be0b549a087bb9a759c036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bias: 1
+  strength: 0.1
+  axis: 1
+  rigidbody: {fileID: 6303418818339598099}
+  velocityGate: 0.2
+  jumpToOriginalTimer: 0.1
+  yScaleLimit: 1.2
+  scaleInverseAmount: 0
+  scaleAmount: 0
+--- !u!111 &7277471573882462490
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799415973705795379}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 825fceeb09dbbf14ca327f9543a1c46a, type: 2}
+  m_Animations:
+  - {fileID: 0}
+  - {fileID: 7400000, guid: 825fceeb09dbbf14ca327f9543a1c46a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

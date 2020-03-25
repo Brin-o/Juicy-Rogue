@@ -24,7 +24,7 @@ public class cameraFollow : MonoBehaviour
         
         float magMod = playerRigidbody.velocity.magnitude;
         if (magMod > 10)
-            speed = Mathf.Lerp(speed, magMod, 2f * Time.deltaTime);
+            speed = Mathf.Lerp(speed, magMod, 1f * Time.deltaTime);
             //magMod = 10;
         else
         {
